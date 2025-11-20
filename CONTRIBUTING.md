@@ -1,83 +1,65 @@
-# Contributing to Project Starter Script
+![Platform](https://img.shields.io/badge/Platform-macOS-000000?logo=apple&logoColor=white)
+![Language](https://img.shields.io/badge/Language-Python_3-3776AB?logo=python&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-green)
+![Maintained](https://img.shields.io/badge/Maintained%3F-Yes-brightgreen)
 
-First off, thanks for taking the time to contribute! 🚀
+# Contributing to WebP Quick Action
 
-We want to make this tool the best way to kickstart new projects, and your help is welcome—whether it's fixing a bug in the Bash logic or improving the boilerplate templates.
+Thanks for your interest in improving this tool! 🚀
+
+Whether you're fixing a bug in the Python logic or suggesting a new feature for the workflow, your help is welcome.
 
 ## How to Contribute
 
-### Reporting Bugs
-If the script crashes, misbehaves, or creates a weird directory structure, please [open an issue](https://github.com/KnowOneActual/Project_Starter_Script/issues/new?template=bug_report.md).
-* Check if the issue already exists.
-* Use the **Bug Report** template to provide details (OS, Bash version, etc.).
+### 1. Reporting Bugs
+If the script fails to convert a file, crashes, or behaves unexpectedly:
+* **Check the requirements:** Ensure you have `webp` installed via Homebrew.
+* **Open an Issue:** Describe what happened, which OS version you are on, and include any error messages if you ran it from the terminal.
 
-### Requesting Features
-Have an idea for a new language template or a workflow improvement?
-* Open a **Feature Request** ticket.
-* Describe *why* this feature would be useful to the broader community.
+### 2. Suggesting Features
+Have an idea to make the compression better or the workflow smoother?
+* Open a **Feature Request** issue.
+* Explain *why* this change would be useful.
 
-### Submitting Changes (Pull Requests)
-
-1.  **Fork the Repo**: Click the "Fork" button in the top right corner of this page.
-2.  **Clone your Fork**:
-    ```bash
-    git clone [https://github.com/YOUR-USERNAME/Project_Starter_Script.git](https://github.com/YOUR-USERNAME/Project_Starter_Script.git)
-    cd Project_Starter_Script
-    ```
-3.  **Create a Branch**:
-    ```bash
-    # Use a descriptive name
-    git checkout -b fix-git-init-logic
-    ```
-4.  **Make your Changes**: Edit the script or the boilerplate files.
-5.  **Test Your Changes**: (See the "Testing" section below).
-6.  **Push and PR**: Push your branch to your fork and open a Pull Request against our `main` branch. Please fill out the [PR Template](.github/PULL_REQUEST_TEMPLATE.md) completely.
+### 3. Submitting Pull Requests
+1.  **Fork** the repository.
+2.  **Clone** your fork locally.
+3.  **Create a branch** for your changes (e.g., `fix-space-in-filenames` or `feat-lossless-option`).
+4.  **Test your changes** (see below).
+5.  **Push** to your fork and open a **Pull Request**.
 
 ---
 
 ## Development & Testing
 
-### Testing the Script Logic
-If you are modifying `start-project.sh`, you should test it by running it against a dummy folder.
+Since the "Quick Action" part is just a wrapper, you should primarily test the Python script directly in your terminal.
 
+### Prerequisites
+You will need the `cwebp` tool installed:
 ```bash
-# Make sure it's executable
-chmod +x start-project.sh
-
-# Run it with a test name
-./start-project.sh test-project-01
+brew install webp
 ````
 
-### Testing Boilerplate Downloads (Important\!)
+### Testing the Script
 
-The script uses `curl` to fetch boilerplate files (like `.editorconfig` or `LICENSE`) directly from the **main** branch of this repository.
+1.  Grab a few test images (JPG, PNG).
+2.  Run the script manually against them:
+    ```bash
+    # Replace with your actual path
+    python3 convert_to_webp.py "path/to/test-image.jpg"
+    ```
+3.  Verify that:
+      * A `.webp` file was created.
+      * The script didn't crash.
+      * The script gracefully handled files that were *already* WebP (it should skip them).
 
-**If you modify a boilerplate file**, the script *will not* see your changes locally because it is still fetching the old version from the live URL.
-
-To test changes to downloaded files:
-
-1.  Edit `start-project.sh`.
-2.  Temporarily change the `BASE_URL` variable or the specific `download_file` line to point to your local file path or your fork's raw URL.
-3.  **Do not commit this change.** Please revert the URL change before submitting your PR.
+-----
 
 ## Style Guidelines
 
-### Bash Scripting
-
-We aim for clean, safe, and portable Bash code.
-
-  * **ShellCheck**: We recommend running your code through [ShellCheck](https://www.shellcheck.net/) to catch common errors.
-  * **Indentation**: Use 4 spaces for indentation.
-  * **Comments**: Comment complex logic, especially regex or API calls.
-
-### Markdown & Text
-
-  * This project uses **Prettier** for formatting.
-  * Refer to `.prettierrc` for the specific configuration (Space indentation, `lf` line endings).
+  * **Python:** We follow standard PEP 8 style. Keep the code readable and clean.
+  * **Commits:** Write clear, descriptive commit messages (e.g., "Fix: Handle file paths with multiple spaces" instead of "fixed bug").
 
 ## License
 
-By contributing to Project Starter Script, you agree that your contributions will be licensed under its MIT License.
-
-```
-```
+By contributing, you agree that your contributions will be licensed under the project's MIT License.
