@@ -12,3 +12,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Initial release of the WebP conversion script.
 - Added Python wrapper for `cwebp`.
 - Created Automator workflow instructions.
+- Update python script to prompt user for quality (100/75/50/25%)
+- Uses osascript for native macOS dialog
+- Defaults to 75% quality for best size/fidelity balanc
