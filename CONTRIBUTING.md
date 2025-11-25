@@ -1,8 +1,3 @@
-![Platform](https://img.shields.io/badge/Platform-macOS-000000?logo=apple&logoColor=white)
-![Language](https://img.shields.io/badge/Language-Python_3-3776AB?logo=python&logoColor=white)
-![License](https://img.shields.io/badge/License-MIT-green)
-![Maintained](https://img.shields.io/badge/Maintained%3F-Yes-brightgreen)
-
 # Contributing to WebP Quick Action
 
 Thanks for your interest in improving this tool! 🚀
@@ -38,28 +33,3 @@ Since the "Quick Action" part is just a wrapper, you should primarily test the P
 You will need the `cwebp` tool installed:
 ```bash
 brew install webp
-````
-
-### Testing the Script
-
-1.  Grab a few test images (JPG, PNG).
-2.  Run the script manually against them:
-    ```bash
-    # Replace with your actual path
-    python3 convert_to_webp.py "path/to/test-image.jpg"
-    ```
-3.  Verify that:
-      * A `.webp` file was created.
-      * The script didn't crash.
-      * The script gracefully handled files that were *already* WebP (it should skip them).
-
------
-
-## Style Guidelines
-
-  * **Python:** We follow standard PEP 8 style. Keep the code readable and clean.
-  * **Commits:** Write clear, descriptive commit messages (e.g., "Fix: Handle file paths with multiple spaces" instead of "fixed bug").
-
-## License
-
-By contributing, you agree that your contributions will be licensed under the project's MIT License.

@@ -1,12 +1,18 @@
 # macOS WebP Quick Action
+![Platform](https://img.shields.io/badge/Platform-macOS-000000?logo=apple&logoColor=white)
+![Language](https://img.shields.io/badge/Language-Python_3-3776AB?logo=python&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-green)
+![Maintained](https://img.shields.io/badge/Maintained%3F-Yes-brightgreen)
 
 A simple, powerful macOS Quick Action that converts images to WebP format using a right-click context menu.
 
-It uses Python to wrap Google's `cwebp` encoder, allowing for silent background processing and smart skipping of files that are already converted.
+It uses Python to wrap Google's `cwebp` encoder, allowing for silent background processing, smart skipping of files that are already converted, and automatic handling of Apple's HEIC format.
 
 ## Features
 
 * **Context Menu Integration:** Right-click any image in Finder -> Quick Actions -> Convert to WebP.
+* **HEIC & HEIF Support:** Automatically handles iPhone/iPad `.heic` images by converting them to WebP (via a temporary internal conversion).
+* **Preserves Orientation:** Keeps EXIF metadata intact so portrait photos don't end up rotated 90 degrees sideways.
 * **Smart Skipping:** Automatically ignores files that are already `.webp`.
 * **Non-Destructive:** Creates a new `.webp` file next to the original; it never overwrites your source images.
 * **Silent Operation:** Runs in the background without popping up annoying terminal windows.
@@ -26,6 +32,8 @@ It uses Python to wrap Google's `cwebp` encoder, allowing for silent background 
     ```bash
     python3 --version
     ```
+
+    *Note: For HEIC support, this tool uses the built-in macOS `sips` command, which comes pre-installed on all Macs.*
 
 ---
 
@@ -56,7 +64,7 @@ Download this repository to a safe place where you keep your scripts (e.g., `~/s
 
 ## Usage
 
-1.  Select one or more images in Finder (JPG, PNG, TIFF, etc.).
+1.  Select one or more images in Finder (JPG, PNG, TIFF, HEIC, etc.).
 2.  Right-click and select **Quick Actions > Convert to WebP**.
 3.  The converted `.webp` versions will appear in the same folder.
 

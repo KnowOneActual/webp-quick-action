@@ -40,23 +40,50 @@ def convert_image(file_path, quality):
         return
 
     filename, ext = os.path.splitext(file_path)
+    ext_lower = ext.lower()
     
     # Skip if already webp
-    if ext.lower() == ".webp":
+    if ext_lower == ".webp":
         print(f"Skipping {os.path.basename(file_path)} (already WebP)")
         return
 
     output_path = f"{filename}.webp"
     
+    # Logic to handle HEIC files
+    temp_png = None
+    source_image = file_path
+
+    if ext_lower in [".heic", ".heif"]:
+        # Create a temp png name
+        temp_png = f"{filename}_temp.png"
+        try:
+            # Use built-in macOS 'sips' to convert HEIC to PNG temporarily
+            # Note: sips usually preserves the rotation tag in the new PNG
+            subprocess.run(
+                ["sips", "-s", "format", "png", file_path, "--out", temp_png],
+                check=True, 
+                stdout=subprocess.DEVNULL, # Keep it silent
+                stderr=subprocess.DEVNULL
+            )
+            source_image = temp_png
+        except subprocess.CalledProcessError:
+            print(f"Error: Could not process HEIC file {os.path.basename(file_path)}")
+            return
+
     try:
         # -q defines quality
-        cmd = [CWEBP_PATH, "-q", quality, file_path, "-o", output_path, "-quiet"]
+        # -metadata all : Keeps the EXIF data so rotation works correctly
+        cmd = [CWEBP_PATH, "-q", quality, "-metadata", "all", source_image, "-o", output_path, "-quiet"]
         subprocess.run(cmd, check=True)
         
     except subprocess.CalledProcessError:
         print(f"Error converting: {os.path.basename(file_path)}")
     except FileNotFoundError:
          print(f"Error: cwebp not found at {CWEBP_PATH}")
+    finally:
+        # Clean up the temporary PNG if we created one
+        if temp_png and os.path.exists(temp_png):
+            os.remove(temp_png)
 
 if __name__ == "__main__":
     if len(sys.argv) > 1:
